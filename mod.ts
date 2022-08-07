@@ -15,9 +15,10 @@ export class Position {
 	squares: { [square: string]: { piece: Piece, color: Color } | null } = { };
 	highlights: string[] = [];
 
-	constructor() {
+	constructor(board?: ({ type: string, color: Color } | null)[][]) {
 		for (let i = "a"; i <= "h"; i = FILES[FILES.indexOf(i) + 1])
 			for (let j = 1; j <= 8; j++) this.squares[`${i}${j}`] = null;
+		if (board) this.set(board);
 	}
 
 	place(piece: Piece, color: Color, square: string) {
@@ -26,6 +27,22 @@ export class Position {
 		if (square[1] < "1" || square[1] > "8") return false;
 		this.squares[square] = { piece, color };
 		return true;
+	}
+
+	set(board: ({ type: string, color: Color } | null)[][]) {
+		if (board.length != 8) { this.clear(); return; }
+		for (let i = 0; i < 8; i++) {
+			if (board[i].length != 8) { this.clear(); return; }
+			for (let j = 0; j < 8; j++) {
+				const square = FILES[j] + (8 - i);
+				if (board[i][j] == null) {
+					this.squares[square] = null;
+					continue;
+				}
+				const { type, color } = board[i][j]!;
+				this.squares[square] = { piece: type as Piece, color };
+			}
+		}
 	}
 
 	remove(square: string) {

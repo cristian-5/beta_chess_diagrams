@@ -1,7 +1,7 @@
 
 export * from 'https://esm.sh/svg2png-wasm@0.6.1';
 import { createCanvas, loadImage } from 'https://deno.land/x/canvas@v1.4.1/mod.ts';
-import { encode, decode, ColorType, DecodeResult } from 'https://deno.land/x/pngs@0.1.1/mod.ts';
+import { decode, ColorType, DecodeResult } from 'https://deno.land/x/pngs@0.1.1/mod.ts';
 import { GIFEncoder, quantize, applyPalette } from 'https://unpkg.com/gifenc@1.0.3/dist/gifenc.esm.js';
 
 import { PIECES_100, PIECES_50, BACKGROUND } from './pieces.ts';

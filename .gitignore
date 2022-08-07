@@ -1,0 +1,6 @@
+
+/resources/
+
+*.test
+test*.*
+test.*

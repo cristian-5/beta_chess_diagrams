@@ -202,7 +202,7 @@ export class Positions {
 		this.#highlights.push(highlight);
 	}
 
-	gif() {
+	gif(delay = 800) {
 		const frames = this.#frames();
 		const encoder = GIFEncoder();
 		if (frames.length == 0) return null;
@@ -210,7 +210,9 @@ export class Positions {
 			const data = rgba(decode(frame));
 			const palette = quantize(data, 24, { format: 'rgb444' });
 			const index = applyPalette(data, palette, 'rgb444');
-			encoder.writeFrame(index, 400, 400, { palette, repeat: -1 });
+			encoder.writeFrame(index, 400, 400, {
+				delay, palette, repeat: -1
+			});
 		}
 		encoder.finish();
 		return encoder.bytes();
